@@ -6,7 +6,8 @@ defmodule UnicafeRouter do
   plug :dispatch
 
   get "/api/foodlists/:restaurant_id" do
-    output = Poison.encode!(UnicafeService.fetch_foodlist(restaurant_id))
+    foodlist = UnicafeService.fetch_foodlist restaurant_id
+    output = Poison.encode! foodlist
     send_resp(conn, 200, output)
   end
 end
